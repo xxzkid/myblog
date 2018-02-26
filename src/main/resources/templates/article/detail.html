@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+#parse("/article/_common.html")
+<title>$!{title} - $!{createUserName}</title>
+<meta name="description" content="$!{desc}">
+</head>
+<body>
+
+	${httpInclude.include('/article/header')}
+    <section class="container">
+    #parse("/article/_tip.html")
+    <div class="content-wrap">
+        <div class="content">
+		<header class="article-header">
+	        <h1 class="article-title">
+	            <a href="javascript:;">$!{atitle}</a>
+	        </h1>
+	        <div class="meta">
+	            #*
+	            <span id="mute-category" class="muted">
+	                <i class="fa fa-list-alt"></i>
+	                <a href="">Java技术篇</a>
+	            </span>
+	            *#
+	            <span class="muted"><i class="fa fa-user"></i>$!{createUserName}</span>
+	            <time class="muted"><i class="fa fa-clock-o"></i> $!{time}</time>
+	            <span class="muted"><i class="fa fa-eye"></i> $!{pv}℃</span>
+	        </div>
+	    </header>
+	    <article class="article-content">
+	    $!{html}
+	    <p>转载请注明：
+		    <a href="$!{serverUrl}">$!{createUserName}</a> » 
+		    <a href="$!{currentUrl}">$!{title}</a>
+		</p>
+	    </article>
+	    <footer class="article-footer">
+	    </footer>
+	    </div>
+
+#parse("/article/_spark.html")
+#parse("/article/_comment.html")
+
+    </div>
+    ${httpInclude.include('/article/sidebar')}
+    </section>
+    #parse("/article/_footer.html")
+
+    <div style="display: none;"><img src="$!{ctx}/article/pv/$!{articleId}.json"></div>
+	<script src="$!{staticPath}/js/comment.js"></script>
+</body>
+</html>

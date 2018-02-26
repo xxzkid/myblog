@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    #parse("/admin/_admin_common.html")
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="$!{staticPath}/css/admin/login.css">
+    <script data-main="$!{staticPath}/js/app/require.config" id="page"
+        data-target-module="user.login" 
+        data-current-page="admin/user/login" src="$!{staticPath}/js/lib/require.js" defer async="true"></script>
+</head>
+<body class="hold-transition login-page">
+
+<div class="login-box">
+  <div class="login-logo">
+    <span><b>Blog Login</b></span>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg"></p>
+
+    <form id="j-user-login" method="post" onsubmit="return false;">
+      <div class="form-group has-feedback">
+        <input type="text" name="username" class="form-control" placeholder="用户名" autofocus>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" name="password" class="form-control" placeholder="密码">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat"  id="j-submit">登录</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+#parse("/admin/_admin_foot.html")
+
+</body>
+</html>

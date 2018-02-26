@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+#parse("/admin/_admin_common.html")
+<meta charset="UTF-8">
+<title>#if($article)修改#else添加#end文章</title>
+<script data-main="$!{staticPath}/js/app/require.config" id="page"
+	data-target-module="article.add" data-current-page="admin/article/add"
+	src="$!{staticPath}/js/lib/require.js" defer async="true"></script>
+<style>
+	.webuploader-element-invisible {
+		position: absolute !important;
+		clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+		clip: rect(1px,1px,1px,1px);
+	}
+	.wd50 {
+	   width: 50%;
+	}
+</style>
+</head>
+<body>
+	<div class="container">
+		#parse("/admin/_admin_nav.html")
+		<form id="j-article-form" onsubmit="return false;" role="form">
+			<input type="hidden" name="id" class="j-id" value="$!{article.id}">
+			<p class="form-group">
+				<p>标题：</p>
+				<input name="title" class="form-control j-title" value="$!{article.title}">
+			</p>
+			<p class="form-group">
+				<p>固定链接：</p>
+				<input name="fixedLink" class="form-control j-fixed-link" value="$!{article.fixedLink}">
+			</p>
+			<p class="form-group">
+				<p>markdown内容：<a id="j-choose-pic" class="btn btn-success" href="javascript:;">选择图片</a></p>
+				<textarea class="form-control j-content" name="content" rows="20" cols="50">$!{article.content}</textarea>
+			</p>
+			<p class="form-group">
+				是否显示： <input type="radio" name="isShow"#if($article.isShow != 1)checked="checked"#else checked="checked"#end value="0">显示
+				<input type="radio" name="isShow"#if($article.isShow == 1) checked="checked"#end value="1"> 隐藏
+			</p>
+			<p class="form-group">
+				排序值： <input type="text" name="sortValue" value="#if($article)$!{article.sortValue}#{else}0#end">
+			</p>
+			<p class="form-group">
+				创建时间： <input type="text" name="createTime" placeholder="yyyy-MM-dd" value="$!date.format('yyyy-MM-dd', $!{article.createTime})">
+			</p>
+			<p class="form-group">
+			分类:<select name="categoryId">
+			<option #if($article && $article.categoryId && $article.categoryId == 0)selected#end value="0">默认</option>
+			#if($categorys)
+			#foreach($c in $categorys)
+			<option #if($article && $article.categoryId && $article.categoryId == $c.id)selected#end value="$!{c.id}">$!{c.name}</option>
+			#end
+			#end
+			</select>
+			<a href="javascript:;" id="j-add-category" class="btn btn-success">添加分类</a>
+			</p>
+			<p class="form-group">
+			标签(以英文逗号,分隔):<input class="wd50" type="text" name="tags" value="$!{article.tags}">
+			</p>
+			<p class="form-group">
+				<a class="btn btn-success" id="j-submit">保存</a>
+			</p>
+		</form>
+	</div>
+
+</body>
+</html>

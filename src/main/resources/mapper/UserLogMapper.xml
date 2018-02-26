@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xxz.myblog.mapper.UserLogMapper">
+
+    <sql id="base_column">
+        id, user_id, login_time, login_stat, login_error_count
+    </sql>
+
+    <sql id="table_name">t_user_log</sql>
+
+	<insert id="save" parameterType="org.xxz.myblog.entity.UserLog" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="table_name"/>(<include refid="base_column"/>)
+        values (#{id}, #{userId}, #{loginTime}, #{loginStat}, #{loginErrorCount})
+    </insert>
+    
+    <delete id="delete">
+        delete from <include refid="table_name" />
+        where id = #{id}
+    </delete>
+    
+    <update id="update">
+        update <include refid="table_name"/>
+        set login_time = #{loginTime},
+        login_stat = #{loginStat},
+        login_error_count = #{loginErrorCount}
+        where user_id = #{userId}
+    </update>
+    
+    <select id="findByUserId" resultType="org.xxz.myblog.entity.UserLog">
+        select <include refid="base_column"/> from <include refid="table_name"/>
+        where user_id = #{userId}
+    </select>
+    
+    <select id="findAll" resultType="org.xxz.myblog.entity.UserLog">
+        select <include refid="base_column"/> from <include refid="table_name"/>
+    </select>
+
+</mapper>

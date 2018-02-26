@@ -1,0 +1,36 @@
+<div id="respond" class="content">
+    <div class="comt-title">
+        <div class="comt-avatar pull-left">
+            <img src="$!{staticPath}/images/default.png" width="54" height="54" alt="" class="avatar avatar-54 wp-user-avatar wp-user-avatar-54 photo avatar-default">                </div>
+        <div class="comt-author pull-left">
+            发表我的评论 </div>
+        <a id="cancel-comment-reply-link" class="pull-right" href="javascript:;">取消评论</a>
+    </div>
+
+    <div class="comt">
+        <div class="comt-box">
+            <textarea placeholder="写点什么..." class="input-block-level comt-area" name="comment" id="comment" cols="100%" rows="3" tabindex="1" onkeydown="if(event.ctrlKey && event.keyCode==13){document.getElementById('submit').click();return false};"></textarea>
+            <div class="comt-ctrl">
+                <button class="btn btn-primary pull-right" type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-check-square-o"></i> 提交评论</button>
+                <div class="comt-tips pull-right">
+                    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+                    <input type="hidden" name="article_id" id="article_id" value="$!{id}">
+                    <p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="845180cc7a"></p>
+                    <p style="display: none;"></p>
+                    <div class="comt-tip comt-loading" style="display: none;">正在提交, 请稍候...</div>
+                    <div class="comt-tip comt-error" style="display: none;">#</div>
+                </div>
+                <span class="muted comt-mailme"><label for="comment_mail_notify" class="checkbox inline" style="padding-top:0"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="comment_mail_notify" checked="checked">有人回复时邮件通知我</label></span>
+            </div>
+        </div>
+
+        <div class="comt-comterinfo" id="comment-author-info" style="display: block;">
+            <h4>Hi，您需要填写昵称和邮箱！</h4>
+            <ul>
+                <li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="help-inline">昵称 (必填)</span></li>
+                <li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="help-inline">邮箱 (必填)</span></li>
+                <li class="form-inline"><label class="hide" for="url">网址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="网址"><span class="help-inline">网址</span></li>
+            </ul>
+        </div>
+    </div>
+</div>

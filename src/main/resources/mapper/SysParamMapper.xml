@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xxz.myblog.mapper.SysParamMapper">
+
+    <sql id="table_name">t_param</sql>
+
+    <sql id="base_column">
+        param_name, param_value, create_user, create_time, update_user, update_time
+    </sql>
+
+	<insert id="save" parameterType="org.xxz.myblog.entity.SysParam" useGeneratedKeys="true" keyProperty="id">
+	    insert into <include refid="table_name" /> (<include refid="base_column" />)
+	    values (#{paramName},#{paramValue},#{createUser},#{createTime},#{updateUser},#{updateTime})
+	</insert>
+    
+    <delete id="delete">
+        delete from <include refid="table_name" />
+        where param_name = #{paramName}
+    </delete>
+    
+    <update id="update">
+        update <include refid="table_name" />
+        set param_value = #{paramValue},
+        update_user = #{updateUser},
+        update_time = #{updateTime}
+        where param_name = #{paramName}
+    </update>
+    
+    <select id="findByName" resultType="org.xxz.myblog.entity.SysParam">
+        select <include refid="base_column" /> from <include refid="table_name" />
+        where param_name = #{paramName}
+    </select>
+    
+    <select id="findAll" resultType="org.xxz.myblog.entity.SysParam">
+        select <include refid="base_column" /> from <include refid="table_name" />
+    </select>
+
+</mapper>

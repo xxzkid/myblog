@@ -1,0 +1,21 @@
+#if($SESSION_USER)
+    <nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+		<ul class="nav navbar-nav">
+		     <li><a class="navbar-brand" href="$!{ctx}/admin/article/myList">B</a></li>
+	         <li><a href="$!{ctx}/admin/article/myList">我的文章列表</a></li>
+	         <li role="presentation" class="dropdown">
+				<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;" role="button" aria-haspopup="true" aria-expanded="false">
+					$!{SESSION_USER.nickName}<span class="caret"></span>
+				</a>
+				 <ul class="dropdown-menu">
+                     <li><a href="$!{ctx}/admin/article/add">添加文章</a></li>
+					 <li><a href="$!{ctx}/admin/system/setup">设置</a></li>
+                     <li><a href="javascript:;" id="j-logout">退出</a></li>
+				 </ul>
+			 </li>
+	         <li><a href="$!{ctx}/" target="_blank">进入网站首页</a></li>
+	     </ul>
+		</div>
+	</nav>
+#end

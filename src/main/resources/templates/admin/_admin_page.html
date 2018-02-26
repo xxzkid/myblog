@@ -1,0 +1,27 @@
+#if ($page.pages gt 1)
+<ul class="pagination pagination-sm no-margin pull-right">
+    <input type="hidden" name="pageNum" id="j-page-num" value="$!{page.pageNum}">
+    #if($page.hasPreviousPage)
+    <li><a class="j-num" data-num="$!{page.prePage}" href="javascript:;">«</a></li>
+    #end
+    #if($page.navigatepageNums && $page.navigatepageNums.size() gt 0)
+        #foreach($num in $page.navigatepageNums)
+            #if($page.pageNum == $num)
+                <li><span>$!{num}</span></li>
+            #else
+                <li><a class="j-num" data-num="$!{num}" href="javascript:;">$!{num}</a></li>
+            #end
+        #end
+    #end
+    #if($page.hasNextPage)
+    <li><a class="j-num" data-num="$!{page.nextPage}" href="javascript:;">»</a></li>
+    #end
+    <li>　跳转到<select style="padding: 4px 5px;margin: 0px 5px;" class="j-sel-num">
+    #foreach($p in [1..$page.pages])
+    <option value="$!{p}" #if($p == $page.pageNum)selected#end>$!{p}</option>
+    #end
+    </select>页
+    </li>
+</ul>
+<p>当前$!{page.pageNum}/$!{page.pages}页，总记录$!{page.total}条</p>
+#end

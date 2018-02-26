@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+#parse("/admin/_admin_common.html")
+<meta charset="UTF-8">
+<title>文章列表</title>
+<script data-main="$!{staticPath}/js/app/require.config" id="page"
+	data-target-module="article.detail" data-current-page="admin/article/myList"
+	src="$!{staticPath}/js/lib/require.js" defer async="true"></script>
+<style>
+.condition {
+    float: left;
+    margin-right: 20px;
+}
+.condition select,input {
+    height: 34px;
+    line-height: 34px;
+}
+</style>
+</head>
+<body>
+
+	<div class="container">
+
+		#parse("/admin/_admin_nav.html")
+		<form>
+		<div class="box-body no-padding">
+		      <p class="condition">
+		      <select class="j-sel-class" name="type">
+		      <option value="title">标题</option>
+		      <option value="content">内容</option>
+		      <option value="tags">标签</option>
+		      </select>
+		      <input type="text" id="j-class" name="title" value="$!{articleQuery.title}$!{articleQuery.content}$!{articleQuery.tags}">
+		      </p>
+		      <p class="condition">
+		      <span>分类：</span>
+		      <select name="categoryId" class="j-sel-category">
+              <option value="">默认</option>
+              #foreach($c in $categorys)
+              <option value="$!{c.id}" #if($articleQuery.categoryId == $c.id)selected#end>$!{c.name}</option>
+              #end
+              </select>
+		      </p>
+		      <p class="condition">
+		      <button type="submit" class="btn btn-success">查询</button>
+		      </p>
+              <table class="table">
+                #if($page && $page.list.size() gt 0)
+                #foreach($li in $page.list)
+                <tr>
+                  <td>$!{velocityCount}</td>
+                  <td>
+                    <a href="$!{ctx}/article/$!{li.fixedLink}" target="_blank">$!{li.title}</a>
+                  </td>
+                  <td>
+                    <a class="badge bg-light-blue" href="$!{ctx}/admin/article/edit/$!{li.id}">编辑</a>
+                    <a class="badge bg-red j-delete-article" href="javascript:;" data-article-id="$!{li.id}">删除</a>
+                  </td>
+                </tr>
+                #end
+                <tr>
+	                <td colspan="3">
+	                    #parse("/admin/_admin_page.html")
+	                </td>
+                </tr>
+	            #else
+	            <tr><td colspan="3">博主还没有撰写文章哦</td></tr>
+                #end
+              </table>
+            </div>
+        </form>
+
+		#parse("/admin/_admin_foot.html")
+	</div>
+
+</body>
+</html>

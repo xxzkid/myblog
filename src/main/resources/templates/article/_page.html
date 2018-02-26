@@ -1,0 +1,23 @@
+#if ($page.pages gt 1)
+<div class="pagination">
+    <input type="hidden" name="pageNum" id="j-page-num" value="$!{page.pageNum}">
+    <ul>
+        #if ($page.hasPreviousPage)
+        <li class="prev-page"><a class="j-num" data-num="$!{page.prePage}" href="javascript:;">上一页</a></li>
+        #end
+        #if($page.navigatepageNums && $page.navigatepageNums.size() gt 0)
+	    #foreach($num in $page.navigatepageNums)
+	    #if($page.pageNum == $num)
+        <li class="active"><span>${num}</span></li>
+        #else
+        <li><a class="j-num" data-num="${num}" href="javascript:;">${num}</a></li>
+        #end
+	    #end
+	    #end
+	    #if($page.hasNextPage)
+        <li class="next-page"><a class="j-num" data-num="$!{page.nextPage}" href="javascript:;">下一页</a></li>
+        #end
+    </ul>
+</div>
+#end
+

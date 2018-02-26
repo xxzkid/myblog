@@ -1,0 +1,40 @@
+<header id="header" class="header">
+    <div class="container-inner">
+        <div class="yusi-logo">
+            <a href="$!{ctx}/">
+                <h1>
+                    <span class="yusi-mono">$!{title}</span>
+                    <span class="yusi-bloger">$!{author}</span>
+                </h1>
+            </a>
+        </div>
+    </div>
+
+    <div id="nav-header" class="navbar">
+#set($cid = $rc.model.httpInclude.request.getParameter('categoryId'))
+        <ul class="nav">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom #if(!$cid)current-menu-item current_page_item#end menu-item-home">
+                <a href="$!{ctx}/">首页</a>
+            </li>
+            #if($categorys && $categorys.size() gt 0)
+            #foreach($c in $categorys)
+            <li class="menu-item menu-item-type-taxonomy #if($cid eq $c.id)current-menu-item#end menu-item-object-category">
+                <a href="/article/list?categoryId=$!{c.id}">$!{c.name}</a>
+            </li>
+            #end
+            #end
+            <li style="float:right;">
+                <div class="toggle-search"><i class="fa fa-search"></i></div>
+                <div class="search-expand" style="display: none;">
+                    <div class="search-expand-inner">
+                        <form method="get" class="searchform themeform" onsubmit="location.href='/article/list?title=' + encodeURIComponent(this.s.value).replace(/%20/g, '+'); return false;" action="/">
+                            <div> <input type="ext" class="search" name="s" onblur="if(this.value=='')this.value='search...';" onfocus="if(this.value=='search...')this.value='';" value="search..."></div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="screen-mini"><button data-type="screen-nav" class="btn btn-inverse screen-nav"><i class="fa fa-list"></i></button></div>
+    </div>
+
+</header>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xxz.myblog.mapper.CommentMapper">
+
+    <sql id="base_column">
+        id, nick_name, email, site, content, parent_id, comment_obj, to_nick_name, status, create_time, audit_user, audit_time
+    </sql>
+
+    <sql id="table_name">t_comment</sql>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="table_name"/>( <include refid="base_column"/> )
+        values (#{id}, #{nickName}, #{email}, #{site}, #{content}, #{parentId}, #{commentObj}, #{toNickName}, #{status}, #{createTime}, #{auditUser}, #{auditTime})
+    </insert>
+    
+    <delete id="delete">
+        delete from <include refid="table_name"/>
+        where id = #{id}
+    </delete>
+    
+    <update id="update">
+        update <include refid="table_name"/>
+        set content = #{content},
+        status = #{status},
+        audit_user = #{auditUser},
+        audit_time = #{auditTime}
+        where id = #{id}
+    </update>
+    
+    <select id="findById" resultType="org.xxz.myblog.entity.Comment">
+        select <include refid="base_column"/> from <include refid="table_name"/>
+        where id = #{id}
+    </select>
+    
+    <select id="findByParentId" resultType="org.xxz.myblog.entity.Comment">
+        select <include refid="base_column"/> from <include refid="table_name"/>
+        where parent_id = #{parentId}
+    </select>
+
+    <select id="findByCommentObj" resultType="org.xxz.myblog.entity.Comment">
+        select <include refid="base_column"/> from <include refid="table_name"/> t
+        where t.comment_obj = #{commentObj} order by create_time desc
+    </select>
+
+</mapper>

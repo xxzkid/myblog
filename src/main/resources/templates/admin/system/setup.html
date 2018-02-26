@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    #parse("/admin/_admin_common.html")
+    <meta charset="UTF-8">
+    <title>设置</title>
+    <script data-main="$!{staticPath}/js/app/require.config" id="page"
+            data-target-module="system.setup" data-current-page="admin/system/setup"
+            src="$!{staticPath}/js/lib/require.js" defer async="true"></script>
+</head>
+<body>
+
+<div class="container">
+    #parse("/admin/_admin_nav.html")
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-2">
+                <lable>上传路径</lable>
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="uploadrl" value="$!{vo.uploadUrl}">
+            </div>
+            <div class="col-sm-2">
+                <a href="javascript:;" class="btn btn-primary j-update">修改</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <lable>标题</lable>
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="title" value="$!{vo.title}">
+            </div>
+            <div class="col-sm-2">
+                <a href="javascript:;" class="btn btn-primary j-update">修改</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <lable>作者</lable>
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="author" value="$!{vo.author}">
+            </div>
+            <div class="col-sm-2">
+                <a href="javascript:;" class="btn btn-primary j-update">修改</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <lable>微信支付二维码</lable>
+            </div>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="wxpay" value="$!{vo.wxpay}">
+            </div>
+            <div class="col-sm-2">
+                <a href="javascript:;" class="btn btn-primary j-update">修改</a>
+            </div>
+        </div>
+    </div>
+    #parse("/admin/_admin_foot.html")
+</div>
+
+</body>
+</html>

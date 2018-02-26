@@ -1,0 +1,60 @@
+﻿<aside class="sidebar">
+	<div class="widget widget_text">
+	    <div class="textwidget">
+	        <div class="social">
+	        </div>
+	    </div>
+	</div>
+    <div class="widget widget_text">
+        <div class="title"><h2>请我喝咖啡</h2></div>
+        <div class="textwidget">
+	        <title></title>
+	        <style type="text/css">
+	            .parentss {
+	                width: 360px;
+	                height: 240px;
+	                margin: 0 auto;
+	                margin-top: 40px;
+	            }
+	            .contentimgss img {
+	                width: 195px;
+	                height: 195px;
+	                margin: 0 auto;
+	                display: block;
+	            }
+	        </style>
+	        <div class="parentss">
+	            <div class="contentimgss">
+	                <img src="$!{wxpay}">
+	            </div>
+	        </div>
+        </div>
+    </div>
+    <div class="widget widget_recent_entries">
+        <div class="title">
+            <h2>近期文章</h2></div>
+        <ul>
+            #if($top5 && $top5.size() gt 0)
+            #foreach($top in $top5)
+            <li>
+                <a href="/article/$!{top.fixedLink}">$!{top.title}</a>
+            </li>
+            #end
+            #end
+        </ul>
+    </div>
+        <div class="widget widget_categories">
+            <div class="title"><h2>分类目录</h2></div>
+            <ul>
+                <li class="cat-item cat-item-0">
+                    <a href="/article/list?categoryId=">默认</a>
+                </li>
+                #foreach($c in $categorys)
+                <li class="cat-item cat-item-$!{c.id}">
+                    <a href="/article/list?categoryId=$!{c.id}">$!{c.name}</a> #*(4)*#
+                </li>
+                #end
+            </ul>
+        </div>
+    </div>
+</aside>

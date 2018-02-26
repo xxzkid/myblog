@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xxz.myblog.mapper.UserMapper">
+
+    <sql id="base_column">
+        id, username, password, nick_name, create_time
+    </sql>
+
+    <sql id="table_name">t_user</sql>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+        insert into <include refid="table_name"/>( <include refid="base_column"/> )
+        values (#{id}, #{username}, #{password}, #{nickName}, #{createTime})
+    </insert>
+    
+    <delete id="delete">
+        delete from <include refid="table_name"/>
+        where id = #{id}
+    </delete>
+    
+    <update id="updateByUsername">
+        update <include refid="table_name"/>
+        set nick_name = #{nickName},
+        password = #{password}
+        where username = #{username}
+    </update>
+    
+    <select id="findByUsername" resultType="org.xxz.myblog.entity.User">
+        select <include refid="base_column"/> from <include refid="table_name"/>
+        where username = #{username}
+    </select>
+
+    <select id="findAll" resultType="org.xxz.myblog.entity.User">
+        select <include refid="base_column"/> from <include refid="table_name"/>
+    </select>
+
+</mapper>

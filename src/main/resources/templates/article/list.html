@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+#parse("/article/_common.html")
+<title>xxzkid | i呵呵</title>
+</head>
+<body>
+
+    ${httpInclude.include('/article/header')}
+    <section class="container">
+    #parse("/article/_tip.html")
+    <div class="content-wrap">
+        <div class="content">
+            #if($page.list.size() gt 0)
+            #foreach($li in $page.list)
+            <article class="excerpt excerpt-nothumbnail">
+                <header>
+                    #* 文章所属目录
+                    <a class="label label-important" href="">$!{li.title}
+                    <i class="label-arrow"></i>
+                    </a>
+                    *#
+                    <h2><a href="$!{ctx}/article/$!{li.fixedLink}" title="$!{li.title}">$!{li.title}</a></h2>
+                </header>
+                #* 文章图片
+                <div class="focus">
+                    <a href="!{ctx}/article/$!{li.fixedLink}">
+                        <img class="thumb" src="$!{staticPath}/images/wx.png" alt="$!{li.title}">
+                    </a>
+                </div>
+                *#
+                <span class="note">$!{li.desc}...
+                </span>
+                <p class="auth-span">
+                    <span class="muted"><i class="fa fa-user"></i>$!{li.createUserName}</span> 
+                    <span class="muted"><i class="fa fa-clock-o"></i>$!date.format("yyyy-MM-dd", ${li.createTime})</span> 
+                    <span class="muted"><i class="fa fa-eye"></i> $!{li.pv}℃</span> 
+                    #*
+                    <span class="muted"><i class="fa fa-comments-o"></i> </span>
+                    <span class="muted">
+	                    <a href="javascript:;" data-action="ding" data-id="1036" id="Addlike" class="action">
+	                        <i class="fa fa-heart-o"></i>
+	                        <span class="count">5</span>喜欢
+	                    </a>
+                    </span>
+                    *#
+                </p>
+            </article>
+            #end
+            #else
+            <article class="excerpt excerpt-nothumbnail">
+            <header>
+            <h2>博主还没有撰写此类文章哦</h2>
+            </header>
+            </article>
+            #end
+            <form>
+            <input type="hidden" name="categoryId" value="$!{articleQuery.categoryId}">
+            #parse("/article/_page.html")
+            </form>
+         </div>
+    </div>
+    ${httpInclude.include('/article/sidebar')}
+    </section>
+    #parse("/article/_footer.html")
+
+</body>
+</html>

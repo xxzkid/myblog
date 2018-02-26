@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>404</title>
+    #parse("/_path.html")
+    <link rel="stylesheet" href="$!{staticPath}/bootstrap/css/bootstrap.min.css">
+    <meta http-equiv="refresh" content="5; url=$!{ctx}/" />
+</head>
+<body>
+<div class="container">
+<h1>404,访问页面不存在哦!</h1>
+<p>5秒跳转到首页，未跳转<a href="$!{ctx}/">点击这里</a></p>
+#parse("/_code.html")
+</div>
+</body>
+</html>

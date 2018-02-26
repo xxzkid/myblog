@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.xxz.myblog.mapper.ArticleMapper">
+
+	<sql id="base_column">
+		id, title, fixed_link, content, html, is_show, sort_value, category_id, category_name,
+		tags, create_user, create_user_name, create_time, update_user, update_time, pv
+	</sql>
+
+	<sql id="table_name">t_article</sql>
+
+	<insert id="save" parameterType="org.xxz.myblog.entity.Article" useGeneratedKeys="true" keyProperty="id">
+	    insert into <include refid="table_name" />(<include refid="base_column" />)
+		values (#{id}, #{title}, #{fixedLink}, #{content}, #{html}, #{isShow}, #{sortValue}, #{categoryId},
+		#{categoryName}, #{tags}, #{createUser}, #{createUserName}, #{createTime}, #{updateUser}, #{updateTime}, 0)
+	</insert>
+	
+	<delete id="delete">
+		delete from <include refid="table_name"/>
+		where id = #{id}
+	</delete>
+	
+	<update id="update">
+		update <include refid="table_name"/>
+		set title = #{title},
+		fixed_link = #{fixedLink},
+		content = #{content},
+		html = #{html},
+		is_show = #{isShow},
+		sort_value = #{sortValue},
+		category_id = #{categoryId},
+		category_name = #{categoryName},
+		tags = #{tags},
+		update_user = #{updateUser},
+		update_time = #{updateTime}
+		where id = #{id}
+	</update>
+
+	<update id="updatePv">
+		update <include refid="table_name"/>
+		set pv = pv + 1
+		where id = #{id}
+	</update>
+	
+	<select id="findById" resultType="org.xxz.myblog.entity.Article">
+		select <include refid="base_column"/> from <include refid="table_name"/>
+		where id = #{id}
+	</select>
+
+	<select id="findByFixedLink" resultType="org.xxz.myblog.entity.Article">
+		select <include refid="base_column"/> from <include refid="table_name"/>
+		where fixed_link = #{fixedLink}
+	</select>
+	
+	<select id="findAll" resultType="org.xxz.myblog.entity.Article">
+		select <include refid="base_column"/> from <include refid="table_name"/> p
+		where p.create_user = #{q.createUser}
+		<if test="status != -1">
+			and p.is_show = #{status}
+		</if>
+		<if test="q.title != null and q.title != ''">
+			and p.title like CONCAT('%',#{q.title},'%')
+		</if>
+		<if test="q.content != null and q.content != ''">
+			and p.content like CONCAT('%',#{q.content},'%')
+		</if>
+		<if test="q.categoryId != null and q.categoryId > -1">
+			and p.category_id = #{q.categoryId}
+		</if>
+		<if test="q.tags != null and q.tags != ''">
+			and p.tags like CONCAT('%', #{q.tags}, '%')
+		</if>
+		order by p.sort_value desc, p.create_time desc
+	</select>
+
+</mapper>

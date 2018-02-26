@@ -1,0 +1,34 @@
+# maven ignore
+target/
+*.war
+*.zip
+*.tar
+*.tar.gz
+bin/
+#gradle ignore
+.gradle
+build/
+# eclipse ignore
+.settings/
+.project
+.classpath
+.externalToolBuilders/
+.factorypath
+
+# idea ignore
+.idea/
+*.ipr
+*.iml
+*.iws
+.springBeans
+
+# temp ignore
+*.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db

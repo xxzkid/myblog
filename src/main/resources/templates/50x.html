@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>$!{desc}</title>
+    #parse("/_path.html")
+    <link rel="stylesheet" href="$!{staticPath}/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+<h1>描述：[$!{msg}], 错误码：[$!{code}]<a href="javascript:window.history.go(-1);">返回</a></h1>
+#parse("/_code.html")
+</body>
+</html>
