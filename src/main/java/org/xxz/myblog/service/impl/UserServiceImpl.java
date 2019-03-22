@@ -53,9 +53,9 @@ public class UserServiceImpl implements UserService {
         if(!user.getPassword().equals(pwd)) {
             log.error("user password error");
             if(userLog == null) {
-                userLogMapper.save(new UserLog(0L, user.getId(), new Date(), 1, 1));
+                userLogMapper.save(new UserLog(0L, user.getId(), new Date().getTime(), 1, 1));
             } else {
-                userLog.setLoginTime(new Date());
+                userLog.setLoginTime(new Date().getTime());
                 userLog.setLoginErrorCount(userLog.getLoginErrorCount() + 1);
                 userLog.setLoginStat(userLog.getLoginStat() + 1);
                 userLogMapper.update(userLog);
@@ -64,15 +64,15 @@ public class UserServiceImpl implements UserService {
         }
 
         if(userLog != null) {
-            if(System.currentTimeMillis() - userLog.getLoginTime().getTime() < 1000 * 60 * 30 && userLog.getLoginErrorCount() >= 3) {
+            if(System.currentTimeMillis() - userLog.getLoginTime() < 1000 * 60 * 30 && userLog.getLoginErrorCount() >= 3) {
                 return Result.fail("该用户禁止登录，请联系管理员");
             }
             userLog.setLoginStat(userLog.getLoginStat() + 1);
-            userLog.setLoginTime(new Date());
+            userLog.setLoginTime(new Date().getTime());
             userLog.setLoginErrorCount(0);
             userLogMapper.update(userLog);
         } else {
-            userLogMapper.save(new UserLog(0L, user.getId(), new Date(), 1, 0));
+            userLogMapper.save(new UserLog(0L, user.getId(), new Date().getTime(), 1, 0));
         }
 
         request.getSession().setAttribute(UserConstants.SESSION_USER, user);

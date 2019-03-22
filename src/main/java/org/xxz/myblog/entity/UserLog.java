@@ -1,7 +1,5 @@
 package org.xxz.myblog.entity;
 
-import java.util.Date;
-
 import lombok.*;
 
 /**
@@ -18,7 +16,7 @@ public class UserLog implements java.io.Serializable {
 
     private Long id;
     private Long userId;
-    private Date loginTime;
+    private Long loginTime;
     private Integer loginStat;
     private Integer loginErrorCount;
     
